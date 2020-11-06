@@ -22,15 +22,12 @@ try:
           insert into pydb_test (name,age,gender) values ('칠사람',36,1)
           insert into pydb_test (name,age,gender) values ('팔사람',37,0)
         """
-    # 텍스트 내용을 읽어서 1줄씩을 리스트에 넣는다.
     sql_list = [];
     for data in sql.split('\n'):
         if len(data.strip()) != 0:
             sql_list.append(data.strip())
-    # 리스트를 반복하여 1개씩 저장한다.
     for sql in sql_list:
         curs.execute(sql)
-    # DB에 적용시킨다.
     conn.commit()
     print("데이터 저장 완료!!!")
 except Exception as e:

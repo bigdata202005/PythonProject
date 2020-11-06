@@ -23,15 +23,6 @@ try:
     curs.execute(sql)
     conn.commit()
     print("테이블 작성완료!!!")
-
-    curs.execute("show tables")
-    data = curs.fetchall()
-    print(data)
-
-    for row in data:
-        print(row[0])
-
-
 except Exception as e:
     print(e)
 finally:

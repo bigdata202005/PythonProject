@@ -17,9 +17,7 @@ try:
     print(result.raw_result)
     print(result.matched_count)
     print("=" * 80)
-    result = conn['big_data']['sample'].find(None)
-    for data in result:
-        print(data)
+
 except Exception as e:
     print("에러 :", e)
 finally:

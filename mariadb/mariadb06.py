@@ -20,17 +20,6 @@ try:
     curs.execute(sql)
     conn.commit()
     print("데이터 저장 완료!!!")
-    print("모든 행!~~~~")
-    sql = "select * from pydb_test order by idx desc"
-    curs.execute(sql)
-    data = curs.fetchall()
-    print(data)
-    print("전체 : ", len(data), "개", sep='')
-    for row in data:
-        for col in row:
-            print(col, end=' ')
-        print()
-
 except Exception as e:
     print(e)
 finally:

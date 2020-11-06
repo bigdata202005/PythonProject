@@ -1,0 +1,22 @@
+오마이뉴스 전체기사|http://rss.ohmynews.com/rss/ohmynews.xml 
+오마이뉴스 주요기사|http://rss.ohmynews.com/rss/top.xml 
+오마이포토 오늘의사진|http://rss.ohmynews.com/rss/todayphoto.xml 
+사는이야기|http://rss.ohmynews.com/rss/life.xml 
+사회|http://rss.ohmynews.com/rss/society.xml 
+문화|http://rss.ohmynews.com/rss/culture.xml 
+정치|http://rss.ohmynews.com/rss/politics.xml 
+경제|http://rss.ohmynews.com/rss/economy.xml 
+민족·국제|http://rss.ohmynews.com/rss/international.xml 
+교육|http://rss.ohmynews.com/rss/education.xml 
+미디어|http://rss.ohmynews.com/rss/media.xml 
+여행|http://rss.ohmynews.com/rss/travel.xml 
+책동네|http://rss.ohmynews.com/rss/book.xml 
+여성|http://rss.ohmynews.com/rss/woman.xml 
+광주전라|http://rss.ohmynews.com/rss/jeolla.xml 
+부산경남|http://rss.ohmynews.com/rss/gyeongnam.xml 
+대전충청|http://rss.ohmynews.com/rss/chungnam.xml 
+인천경기|http://rss.ohmynews.com/rss/gyeonggi.xml 
+대구경북|http://rss.ohmynews.com/rss/kyungbuk.xml 
+강원제주|http://rss.ohmynews.com/rss/gangwonjeju.xml 
+해외리포트|http://rss.ohmynews.com/rss/ab_reporter.xml 
+만화만평|http://rss.ohmynews.com/rss/cartoon.xml 

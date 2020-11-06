@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>한줄메모장</title>
+    <script type="text/javascript">
+	function formCheck(){
+		var name = document.getElementById("name").value;
+		if(name==null || name.trim().length==0){
+			alert('이름은 반드시 입력해야 합니다.');
+			document.getElementById("name").value = "";
+			document.getElementById("name").focus();
+			return false;
+		}
+		var name = document.getElementById("password").value;
+		if(name==null || name.trim().length==0){
+			alert('비밀번호는 반드시 입력해야 합니다.');
+			document.getElementById("password").value = "";
+			document.getElementById("password").focus();
+			return false;
+		}
+		var memo = document.getElementById("content").value;
+		if(memo==null || memo.trim().length==0){
+			alert('내용은 반드시 입력해야 합니다.');
+			document.getElementById("content").value = "";
+			document.getElementById("content").focus();
+			return false;
+		}
+		return true;
+	}
+
+	function editForm(idx, name, content){
+		document.getElementById("mainForm").setAttribute("action", "edit");
+		document.getElementById("submitBtn").value="수정";
+		document.getElementById("cancelBtn").style.visibility = 'visible';
+		document.getElementById("idx").value=idx;
+		document.getElementById("name").value=name;
+		document.getElementById("content").value=content;
+	}
+	function deleteForm(idx, name, content){
+		document.getElementById("mainForm").setAttribute("action", "delete");
+		document.getElementById("submitBtn").value="삭제";
+		document.getElementById("cancelBtn").style.visibility = 'visible';
+		document.getElementById("idx").value=idx;
+		document.getElementById("name").value=name;
+		document.getElementById("content").value=content;
+		document.getElementById("password").focus();
+	}
+	function resetForm(){
+		document.getElementById("mainForm").setAttribute("action", "insert");
+		document.getElementById("submitBtn").value="저장";
+		document.getElementById("cancelBtn").style.visibility = 'hidden';
+		document.getElementById("idx").value=0;
+		document.getElementById("name").value='';
+		document.getElementById("content").value='';
+		document.getElementById("name").focus();
+	}
+	function changeSize(obj){
+	    // alert(obj.value)
+		location.href = '?p={{ paging.current_page }}&s=' + obj.value + '&b={{ paging.block_size }}';
+	}
+
+    </script>
+    <style type="text/css">
+	table { width: 1000px; margin: auto; padding: 5px;}
+	th { border: 1px solid gray; background-color: silver;  padding: 5px;}
+	td { border: 1px solid gray; padding: 5px;}
+	.title { font-size:28pt; text-align: center; border: none; }
+	.sub_title { font-weight: bold; border: none; text-align: right;}
+
+    </style>
+</head>
+<body>
+<form action="insert" method="post" onsubmit="return formCheck();" id="mainForm">
+<table>
+    <tr>
+        <td colspan="5" class="title">출석체크 게시판</td>
+    </tr>
+    <tr>
+        <td colspan="5" class="sub_title">
+            {{ paging.page_info() }}
+			<select id="ps" onchange="changeSize(this);">
+				<option value="5" {{ 'selected="selected"' if paging.page_size==5 else ' ' }}>5개씩보기</option>
+				<option value="10"  {{ 'selected="selected"' if paging.page_size==10 else ' ' }}>10개씩보기</option>
+				<option value="20"  {{ 'selected="selected"' if paging.page_size==20 else ' ' }}>20개씩보기</option>
+				<option value="30"  {{ 'selected="selected"' if paging.page_size==30 else ' ' }}>30개씩보기</option>
+				<option value="50"  {{ 'selected="selected"' if paging.page_size==50 else ' ' }}>50개씩보기</option>
+				<option value="100"  {{ 'selected="selected"' if paging.page_size==100 else ' ' }}>100개씩보기</option>
+			</select>
+
+        </td>
+    </tr>
+    <tr>
+        <th width="5%">No</th>
+        <th width="60%">메모</th>
+        <th width="10%">작성자</th>
+        <th width="15%">작성일</th>
+        <th width="10%">IP</th>
+    </tr>
+    {% if paging.total_count > 0 %}
+    {% for row in paging.list %}
+    <tr align="center">
+        <td>{{row.idx}}</td>
+        <td align="left">
+            {{row.content}}
+            [<a href="#" onclick="editForm('{{row.idx}}','{{row.name}}','{{row.content}}')">Edit</a>]
+			[<a href="#" onclick="deleteForm('{{row.idx}}','{{row.name}}','{{row.content}}')">Delete</a>]
+        </td>
+        <td>{{row.name}}</td>
+        <!-- 날짜 포멧팅 -->
+        <td>{{row.regDate.strftime('%Y-%m-%d')}}</td>
+        <td>{{row.ip}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="5" align="center" style="border:none;">
+            {{ paging.page_list()|safe }} <!-- html출력되게하려면 |safe -->
+        </td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="5" align="center">등록된 글이 없습니다.</td>
+    </tr>
+    {% endif %}
+    <tr>
+        <td colspan="5" style="border: none;text-align: center;">
+            <input type="hidden" name="idx" id="idx" value="0">
+            <input type="hidden" name="p" id="p" value="{{paging.current_page}}">
+            <input type="hidden" name="s" id="s" value="{{paging.page_size}}">
+            <input type="hidden" name="b" id="b" value="{{paging.block_size}}">
+            <input type="text" name="name" id="name" required="required" placeholder="이름입력"/>
+            <input type="password" name="password" id="password" required="required" placeholder="비번입력"/>
+            <input type="text" name="content" id="content" required="required" placeholder="내용입력" size="70"/>
+            <input type="submit" value="저장" id="submitBtn"/>
+            <input type="button" value="취소" id="cancelBtn" style="visibility:hidden;" onclick="resetForm()"/>
+        </td>
+    </tr>
+</table>
+</form>
+</body>
+</html>

@@ -1,0 +1,6 @@
+print('Hello World!!!')
+print('-'*80)
+print('Hello Python!!!')
+print('-'*80)
+print('Hello PyCharm!!!')
+print('-'*80)
